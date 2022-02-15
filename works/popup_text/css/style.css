@@ -1,0 +1,56 @@
+@charset "utf8";
+
+/*ポップアップウィンドウの背景*/
+.popup {
+    /*メッセージのコンテンツを中央に配置する*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /*半透明の黒背景にする*/
+    height: 100vh;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    
+    /*画面がスクロールしないように固定する*/
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+/*メッセージのコンテンツ部分*/
+.content {
+    background: rgba(255, 255, 255, 1);
+    padding: 30px;
+    width: 50%;
+    /*position: fixed;*/
+    /*height: 20vh;*/
+    /*top: 40vh;*/
+    /*left: 25vw;*/
+    /*width: 50vw;*/
+}
+/*media query*/
+/*ref)*/
+/*https://www.seojuku.com/blog/responsive-mediaquery.html*/
+
+/*タブレット 横は	パソコンと同じ*/
+/*タブレット 縦のみ	*/
+@media screen and (max-width: 1024px) and (orientation: portrait){
+    
+}
+/*タブレット 縦から	*/
+@media screen and (max-width: 1024px){
+    
+}
+/*スマホ 横のみ	*/
+@media screen and (max-width: 896px) and (orientation: landscape){
+    
+}
+/*スマホ 横から	*/ 
+@media screen and (max-width: 896px){
+    
+}
+/*スマホ　縦からは */
+@media screen and (max-width: 480px){
+    
+}

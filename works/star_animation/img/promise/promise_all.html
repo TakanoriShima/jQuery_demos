@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>Promise.all</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    </head>
+    <body>
+        <h1>Promise.all</h1>
+        <p>非同期処理の操作が完了したときに結果を返すもの</p>
+        <p>PromiseはES2015(ES6)で導入された非同期処理の結果を表現するビルトインオブジェクト</p>
+        
+        <script>
+
+            let x;
+            let y;
+            
+            const add = (num1, num2) => {
+                console.log('call add func');
+                x = num1 + num2;
+                console.log(`x = ${num1} + ${num2} = ${x}`);
+                
+            }
+            
+            const sub = (num1, num2) => {
+                console.log('call sub func');
+                y = num1 - num2;
+                console.log(`y = ${num1} + ${num2} = ${y}`);
+            }
+            
+            const show_messages = (messages) => {
+                console.log('.... messages ....');
+                messages.forEach((message) => {
+                    console.log(message);
+                });
+                console.log('..................');
+            }
+            
+            const show_result = () => {
+                console.log('complete');
+                console.log('x = ' + x);
+                console.log('y = ' + y);
+                console.log('x + y = ' + (x + y));
+                console.log('x - y = ' + (x - y));
+            }
+            
+            const start = new Promise((resolve, reject) => {
+                console.log('start!');
+                let num1 = Math.ceil(Math.random() * 100);
+                let num2 = Math.ceil(Math.random() * 100);
+                setTimeout(() => {
+                    add(num1, num2);
+                    resolve("add");
+                }, 4000);
+            });
+            
+            const next = new Promise((resolve, reject) => {
+                let num1 = Math.ceil(Math.random() * 100);
+                let num2 = Math.ceil(Math.random() * 100);
+                setTimeout(() => {
+                    sub(num1, num2);
+                    resolve("sub");
+                }, 2000);
+            });
+            
+            Promise.all([start, next]).then((messages)  =>  {
+                show_messages(messages);
+                setTimeout(show_result, 2000);
+            });
+            
+        </script>
+    </body>
+</html>

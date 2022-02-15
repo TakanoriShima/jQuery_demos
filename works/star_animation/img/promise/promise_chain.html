@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>PromiseChain</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    </head>
+    <body>
+        <h1>PromiseChain</h1>
+        <p>非同期処理の操作が完了したときに結果を返すもの</p>
+        <p>PromiseはES2015(ES6)で導入された非同期処理の結果を表現するビルトインオブジェクト</p>
+        <script>
+            
+            const start = (str, resolve) => {
+                 setTimeout(
+                    () => {
+                        console.log("#1");
+                        resolve(str);
+                    }
+                , 1000);
+            }
+            
+            // executor 
+            const executor = (resolve, reject) => { // #1
+               start("こんにちは！", resolve);
+            }
+            
+            // start!
+            const func1 = () => {
+                // executor を引数としてPromiseオブジェクト作成
+                const promise = new Promise(executor);
+                return promise;
+            }
+            
+            const func2 = (msg) => { // #2
+                return new Promise(
+                    // executor 
+                    (resolve, reject) => {
+                        setTimeout(
+                            () => {
+                                console.log('#2')
+                                resolve(msg + "私は ")
+                            }
+                        , 2000);
+                    }
+                );
+            }
+            
+            const func3 = (msg) => { // #3
+                return new Promise(
+                    // executor 
+                    (resolve, reject) => {
+                        setTimeout(
+                            () => {
+                                console.log('#3');
+                                resolve(msg + '島尚徳と申します');
+                                // return msg + 'Jeccy.'
+                            }
+                        , 3000);
+                    }
+                );
+            }
+            
+            const func4 = (msg) => { // #4
+                return new Promise(
+                    // executor
+                    (resolve, reject) => {
+                        setTimeout(
+                            () => {
+                                console.log('#4');
+                                console.log(msg);
+                            }
+                        , 3000);
+                    }
+                );
+                
+            }
+            const error_message = () => { // エラーハンドリング
+                console.error('Something wrong!')
+            }
+            
+            // Promiseオブジェクト作成
+            // const promise = new Promise(func1);
+
+            // PromiseChain
+            func1().then(func2).then(func3).then(func4).catch(error_message);
+      
+        </script>
+    </body>
+</html>

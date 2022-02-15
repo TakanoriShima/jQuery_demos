@@ -1,0 +1,44 @@
+@charset "utf8";
+select {
+-webkit-appearance: none;/* ベンダープレフィックス(Google Chrome、Safari用) */
+-moz-appearance: none; /* ベンダープレフィックス(Firefox用) */
+appearance: none; /* 標準のスタイルを無効にする */
+}
+::-ms-expand { /* select要素のデザインを無効にする（IE用） */
+display: none;
+}
+select {
+    position: absolute;
+    left: 134px;
+    top: 64px;
+    border: none;
+}
+input[type="search"] {
+    padding: 5px;
+}
+
+/*media query*/
+/*ref)*/
+/*https://www.seojuku.com/blog/responsive-mediaquery.html*/
+
+/*タブレット 横は	パソコンと同じ*/
+/*タブレット 縦のみ	*/
+@media screen and (max-width: 1024px) and (orientation: portrait){
+    
+}
+/*タブレット 縦から	*/
+@media screen and (max-width: 1024px){
+    
+}
+/*スマホ 横のみ	*/
+@media screen and (max-width: 896px) and (orientation: landscape){
+    
+}
+/*スマホ 横から	*/ 
+@media screen and (max-width: 896px){
+    
+}
+/*スマホ　縦からは */
+@media screen and (max-width: 480px){
+    
+}

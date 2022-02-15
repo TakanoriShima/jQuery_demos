@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="robots" content="noindex,nofollow">
+        <title>ボールの落下</title>
+        <style>
+            body {
+                margin:0;
+                padding:0;
+                background-color: #333;
+            }
+            #ball {
+                display: block;
+                width: 50px;
+                height: 50px;
+                position: absolute;
+                border: solid 8px #000;
+                border-radius: 50%;
+                background-color: #ffffff;
+            }
+            #start{
+                position: absolute;
+                bottom: 0;
+            }
+            #stop{
+                position: absolute;
+                bottom: 0;
+                left: 100px;
+            }
+        </style>
+    </head>
+    <body>
+        <span id="ball"></span>
+        <button id="start">スタート</button>
+        <button id="stop">ストップ</button>
+        <script>
+            var ball = document.getElementById("ball");
+            ball.style.dislay = "block";
+
+            let bh = ball.offsetHeight;
+            let bw = ball.offsetWidth;
+            let left = ( window.innerWidth / 2 ) - ( bw / 2 );
+            let y = bh;
+            let ground = window.innerHeight - bh;
+            
+            console.log('bh: ' + bh);
+            console.log('bw: ' + bw);
+            console.log('left: ' + left);
+            console.log('y: ' + y);
+            ball.style.left = left + "px";
+            ball.style.top = y + "px";
+            
+            let v = 0;
+            let count = 0;  
+            const gravity = () => {
+                count++;
+                v += 0.01;
+                y += v;
+                console.log('count: ' + count + ' / y: ' + y + 'px');
+                ball.style.top = y + "px";
+                if(y > ground - 10){
+                    v = -0.9 * v;
+                }
+            }
+            
+            let g;
+            
+            const start_button = document.getElementById("start");
+            start_button.addEventListener('click', function(){
+                
+                ball.style.dislay = "block";
+                
+                let bh = ball.offsetHeight;
+                let bw = ball.offsetWidth;
+                let left = ( window.innerWidth / 2 ) - ( bw / 2 );
+                let y = bh;
+                let ground = window.innerHeight - bh;
+                
+                console.log('bh: ' + bh);
+                console.log('bw: ' + bw);
+                console.log('left: ' + left);
+                console.log('y: ' + y);
+                ball.style.left = left + "px";
+                ball.style.top = y + "px";
+                
+                g = setInterval(gravity, 1);
+            })
+            
+            const stop_button = document.getElementById("stop");
+            stop_button.addEventListener('click', function(){
+                clearInterval(g);
+            })
+            
+        </script>
+    </body>
+</html>

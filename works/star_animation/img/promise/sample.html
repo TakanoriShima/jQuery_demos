@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>PromiseChainテスト</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    </head>
+    <body>
+        <h1>PromiseChain</h1>
+        <p>非同期処理の操作が完了したときに結果を返すもの</p>
+        <p>PromiseはES2015(ES6)で導入された非同期処理の結果を表現するビルトインオブジェクト</p>
+        <script>
+            
+            let message;
+            
+            // 1つ目のPromise処理
+            const promise1 = () => {
+                return new Promise(resolve => {
+                    setTimeout(() => {
+                        message = 'こんにちは！ '
+                        resolve(message);
+                    }, 2000);
+                });
+            }
+            
+            // 2つ目のPromise処理
+            const promise2 = (message) => {
+                return new Promise(resolve => {
+                    setTimeout(() => {
+                        message += 'Promiseは'
+                        resolve(message);
+                    }, 2000);
+                });
+            }
+            
+            // 3つ目のPromise処理
+            const promise3 = (message) => {
+                return new Promise(resolve => {
+                    setTimeout(() => {
+                        message += '難しいな...';
+                        resolve(message);
+                    }, 2000);
+                })
+            }
+            
+            promise1()
+            // 1つ目の非同期処理
+            .then(data => {
+                  console.log(data);
+                  return promise2(data); // 次に実行する非同期処理を指定
+            })
+            // 2つ目の非同期処理
+            .then(data => {
+                  console.log(data);
+                  return promise3(data); // 次に実行する非同期処理を指定
+            })
+            // 3つ目の非同期処理
+            .then(data => console.log(data))
+      
+        </script>
+    </body>
+</html>

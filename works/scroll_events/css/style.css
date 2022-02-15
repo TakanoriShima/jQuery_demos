@@ -1,0 +1,91 @@
+@charset "utf8";
+/*レイアウト調整*/
+#wrapper {
+    width: 95%;
+    margin: 0 auto;
+    margin-top: 20px;
+    background-color: #eeeeee45;
+    padding: 30px;
+}
+h1 {
+    text-align: center;
+    color: red;
+    width: 50%;
+    margin: 0 auto;
+    border-bottom: double 3px red;
+    margin-bottom: 50px;
+}
+h2 {
+    text-align: center;
+    color: blue;
+    width: 50%;
+    margin: 0 auto;
+    border-bottom: double 3px blue;
+    margin-bottom: 200vh;
+}
+
+/*画像の拡大*/
+#main_view {
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 5vh;
+}
+img {
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+}
+
+/*スムーズスクロール*/
+#to_top {
+    position: fixed;
+    right: 45px;
+    bottom: 25px;  
+}
+#to_profile {
+    position: fixed;
+    right: 170px;
+    bottom: 25px;
+}
+
+#to_contact {
+    position: fixed;
+    right: 293px;
+    bottom: 25px;
+}
+
+/*スクロール量の応じて線を伸ばす*/
+#main_view + p {
+    border-bottom: solid 3px #00800059;
+    border-right: solid 10px #00800059;
+    margin-bottom: 35px;
+    width: 10%;
+    text-align: right;
+    padding-right: 10px;
+}
+
+/*media query*/
+/*ref)*/
+/*https://www.seojuku.com/blog/responsive-mediaquery.html*/
+
+/*タブレット 横は	パソコンと同じ*/
+/*タブレット 縦のみ	*/
+@media screen and (max-width: 1024px) and (orientation: portrait){
+    
+}
+/*タブレット 縦から	*/
+@media screen and (max-width: 1024px){
+    
+}
+/*スマホ 横のみ	*/
+@media screen and (max-width: 896px) and (orientation: landscape){
+    
+}
+/*スマホ 横から	*/ 
+@media screen and (max-width: 896px){
+    
+}
+/*スマホ　縦からは */
+@media screen and (max-width: 480px){
+    
+}

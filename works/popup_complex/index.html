@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <!-- ViewPort Setting -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <!-- Original CSS -->
+        <link rel="stylesheet" href="css/style.css">
+        <!-- Favicon -->
+        <link rel="icon" href="images/favicon.ico">
+        <title>ポップアップ</title>
+
+    </head>
+    <body>
+        <div id="wrapper">
+            <h1>ポップアップ</h1>
+            <!--ポップアップ背景-->
+            <div class="popupbg"></div>
+            <div class="global_wrapper">
+                <ul class="item_wrapper">
+                    <li class="item">
+                        <!-- クラス名に"pop"、hrefにポップアップしたいID名を入力-->
+                        <a href="#img01_wrapper" class="pop"><img src="images/1.jpg" alt="" width="150" height="150" class="thumb"/></a>
+                        <!-- ポップアップしたい要素-->
+                        <div id="img01_wrapper" class="popup_wrapper">
+                            <img src="images/1.jpg" alt="" width="400" height="400" class="img" />
+                            <p class="caption">Caption1</p>
+                            <div class="close_btn">×</div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <!-- クラス名に"pop"、hrefにポップアップしたいID名を入力-->
+                        <a href="#img02_wrapper" class="pop"><img src="images/2.jpg" alt="" width="150" height="150" class="thumb"/></a>
+                        <!-- ポップアップしたい要素-->
+                        <div id="img02_wrapper" class="popup_wrapper">
+                            <img src="images/2.jpg" alt="" width="400" height="400" class="img" />
+                            <p class="caption">Caption2</p>
+                            <div class="close_btn">×</div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <!-- クラス名に"pop"、hrefにポップアップしたいID名を入力-->
+                        <a href="#img03_wrapper" class="pop"><img src="images/3.jpg" alt="" width="150" height="150" class="thumb"/></a>
+                        <!-- ポップアップしたい要素-->
+                        <div id="img03_wrapper" class="popup_wrapper">
+                            <img src="images/3.jpg" alt="" width="400" height="400" class="img" />
+                            <p class="caption">Caption3</p>
+                            <div class="close_btn">×</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
+        <!-- Original JavaScript -->
+        <script src="js/script.js"></script>
+    </body>
+</html>

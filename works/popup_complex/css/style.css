@@ -1,0 +1,109 @@
+@charset "utf-8";
+body {
+    height: 100vh;
+}
+#wrapper {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+h1 {
+    text-align: center;
+    color: red;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.item_wrapper:after {
+  content: "";
+  display: block;
+  clear: both;
+  height: 0;
+}
+
+.item {
+  width: 150px;
+  height: 150px;
+  padding: 20px;
+  float: left;
+}
+
+.popupbg {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  top: 0;
+  left: 0;
+  display: none;
+}
+
+.popup_wrapper {
+  width: 500px;
+  height: 600px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin: -300px 0 0 -250px;
+  z-index: 11;
+  text-align: center;
+  display: none;
+}
+.popup_wrapper .popup {
+  position: relative;
+}
+.popup_wrapper .img {
+  display: inline-block;
+  width: 500px;
+  height: 500px;
+}
+
+.popup_wrapper .caption {
+  padding: 10px;
+  font-size: 18px;
+  color: #fff;
+}
+.popup_wrapper .close_btn {
+  line-height: 30px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  background: #fff;
+  margin: -15px -15px 0 0;
+  font-size: 24px;
+  vertical-align: middle;
+  text-align: center;
+  cursor: pointer;
+}
+
+/*media query*/
+/*ref)*/
+/*https://www.seojuku.com/blog/responsive-mediaquery.html*/
+
+/*タブレット 横は	パソコンと同じ*/
+/*タブレット 縦のみ	*/
+@media screen and (max-width: 1024px) and (orientation: portrait){
+    
+}
+/*タブレット 縦から	*/
+@media screen and (max-width: 1024px){
+    
+}
+/*スマホ 横のみ	*/
+@media screen and (max-width: 896px) and (orientation: landscape){
+    
+}
+/*スマホ 横から	*/ 
+@media screen and (max-width: 896px){
+    
+}
+/*スマホ　縦からは */
+@media screen and (max-width: 480px){
+    
+}

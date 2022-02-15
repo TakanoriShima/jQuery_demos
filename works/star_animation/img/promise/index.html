@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>Promiseテスト</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    </head>
+    <body>
+        <h1>Promiseテスト</h1>
+        <p>非同期処理の操作が完了したときに結果を返すもの</p>
+        <p>PromiseはES2015(ES6)で導入された非同期処理の結果を表現するビルトインオブジェクト</p>
+        <p id="disp_count"></p>
+        <p id="disp_num"></p>
+        <p id="disp_result"></p>
+        <button id="start">スタート</button>
+        <button id="stop">ストップ</button>
+        <script>
+            const disp_count = document.getElementById("disp_count");
+            disp_count.textContent = "試行回数:";
+            const disp_num = document.getElementById("disp_num");
+            disp_num.textContent = "サイコロの目:";
+            const disp_result = document.getElementById("disp_result");
+            disp_result.textContent = "占い結果が表示されます";
+            
+            // executor (プロミス生成時の引数に渡すコールバック関数) 
+            const executor = (resolve, reject) => {
+                // 1 ~ 5までの数字
+                let num = Math.floor(Math.random() * 5) + 1;
+                disp_num.textContent = "サイコロの目: " + num
+                
+                // 非同期通信がうまくいったとき
+                if(num >= 3){
+                    // console.log("Good!!");
+                    resolve("Good!!");
+                }else{ // 非同期通信が失敗したとき
+                    // console.log("Bad...");
+                    reject("Bad...");
+                }
+            }
+        
+            const success_message = (response) => {
+                disp_result.textContent = response;
+                // console.log(response);
+            }
+        
+            // executor(1, 3);
+        
+            const failuire_message = (error) => {
+                // console.log(error);
+                disp_result.textContent = error;
+            }
+            let count = 1;
+            const random_result = () => {
+                disp_count.textContent = "試行回数: " +  count +  "回目";
+                count++;
+                // プロミス生成時に executorを渡す
+                const promise = new Promise(executor);
+                // Promise#thenメソッドで、Promiseがresolve（成功）、reject（失敗）したときに呼ばれるコールバック関数を登録します。
+                // thenメソッドの第一引数にはresolve（成功）時に呼ばれるコールバック関数、第二引数にはreject（失敗）時に呼ばれるコールバック関数を渡します。
+                // resolveに渡した値は、thenメソッドの1番目のコールバック関数（success_message）に渡されます。 rejectに渡したエラーオブジェクトは、thenメソッドの2番目のコールバック関数（failuire_message）に渡されます。
+                promise.then(success_message, failuire_message);
+            }
+            
+            let interval_id;
+            
+            
+            document.getElementById("start").addEventListener('click', () => {
+                interval_id = setInterval(random_result, 1000);
+            });
+            
+            document.getElementById("stop").addEventListener('click', () => {
+                clearInterval(interval_id);
+            });
+            
+            
+            
+            
+            
+        
+            
+        
+            // // executor 
+            // const executor = (resolve, reject) => {
+            //     // 非同期の処理が成功したときはresolveを呼ぶ
+            //     // 非同期の処理が失敗したときはrejectを呼ぶ
+            // }; 
+            
+            // const executer = (resolve, reject) => {
+            //     setTimeout(() => {
+            //         if(path.startsWith("/success")){
+            //              resolve({ body: `Response body of ${path}` });
+            //         }else{
+            //             reject(new Error("NOT FOUND"));
+            //         }
+            //     })
+            // }
+
+            
+            
+            // const promise = new Promise(executor);
+            
+            // // コールバック関数
+            // const onFulfilled = () => {
+            //     console.log("resolveされたときに呼ばれる");
+            // };
+            // const onRejected = () => {
+            //     console.log("rejectされたときに呼ばれる");
+            // };
+            
+            // // `then`メソッドで成功時と失敗時に呼ばれるコールバック関数を登録 
+            // promise.then(onFulfilled, onRejected);
+            
+            // setTimeout + callback
+            // const finish = () => {
+            //     process.textContent = "終了";
+            // } 
+            
+            // setTimeout(finish, 2000);
+            
+            // Promise原型
+            // const promise = new Promise(() => {
+            //     setTimeout(() => {
+            //         process.textContent = "終了";
+            //     }, 2000);
+            // });
+            
+            // 
+            // const promise = new Promise((message) => {
+            //     setTimeout(() => {
+            //         message("終了です");
+            //         // process.textContent = "終了";
+            //     }, 2000);
+            // });
+            
+            // const promise = new Promise(a => {
+            
+            //     setTimeout(() => {
+            //         a('処理が完了');
+            //         process.textContent = "終了";
+            //     }, 2000)
+            
+            // });
+            
+            // // then()を使って完了通知を受け取る
+            // // 引数resultには渡された文字列が格納されている
+            // promise.then(result => console.log(result));
+            // promise.then(message => {
+            //         process.textContent = message;
+            //     }
+            // );
+            /**
+             * 1000ミリ秒未満のランダムなタイミングでレスポンスを疑似的にデータ取得する関数
+             * 指定した`path`にデータがある場合、成功として**Resolved**状態のPromiseオブジェクトを返す
+             * 指定した`path`にデータがない場合、失敗として**Rejected**状態のPromiseオブジェクトを返す
+             */
+            // function dummyFetch(path) {
+            //     return new Promise((resolve, reject) => {
+            //         setTimeout(() => {
+            //             if (path.startsWith("/success")) {
+            //                 resolve({ body: `Response body of ${path}` });
+            //             } else {
+            //                 reject(new Error("NOT FOUND"));
+            //             }
+            //         }, 1000 * Math.random());
+            //     });
+            // }
+            // // `then`メソッドで成功時と失敗時に呼ばれるコールバック関数を登録
+            // // /success/data のリソースは存在するので成功しonFulfilledが呼ばれる
+            // dummyFetch("/success/data").then(function onFulfilled(response) {
+            //     console.log(response); // => { body: "Response body of /success/data" }
+            // }, function onRejected(error) {
+            //     // この行は実行されません
+            // });
+            // // /failure/data のリソースは存在しないのでonRejectedが呼ばれる
+            // dummyFetch("/failure/data").then(function onFulfilled(response) {
+            //     // この行は実行されません
+            // }, function onRejected(error) {
+            //     console.log(error); // Error: "NOT FOUND"
+            // });
+        
+        </script>
+    </body>
+</html>

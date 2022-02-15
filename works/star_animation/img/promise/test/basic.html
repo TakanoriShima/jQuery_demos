@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>Promiseテスト</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    </head>
+    <body>
+        <h1>Promiseテスト</h1>
+        <p>非同期処理の操作が完了したときに結果を返すもの</p>
+        <p>PromiseはES2015(ES6)で導入された非同期処理の結果を表現するビルトインオブジェクト</p>
+        <ul></ul>
+        
+        <script>
+           
+            /* global $*/
+            const func1 = () => {
+                const promise = new Promise( (resolve, reject) => {
+                    const message = "#1";
+                    setTimeout(() => {
+                        console.log(message);
+                        resolve(message);
+                    }, 1000);
+                    $('ul').append($('<li>', {text: message}))
+                    
+                });
+                return promise;
+            }
+            
+            const func2 = (message) => {
+                message += " #2";
+                const promise = new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        console.log(message);
+                        resolve(message);
+                    }, 1500);
+                    $('ul').append($('<li>', {text: message}))
+                    
+                });
+                
+                return promise;
+            }
+            
+            const func3 = (message) => {
+                message += " #3";
+                const promise = new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        console.log(message);
+                        resolve(message);
+                    }, 2000);
+                    $('ul').append($('<li>', {text: message}))
+                    
+                });
+                
+                return promise;
+            }
+            
+            const func4 = (message) => {
+                message += " #4";
+                const promise = new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        console.log(message);
+                        resolve(message);
+                    }, 2500);
+                    $('ul').append($('<li>', {text: message}))
+                    
+                });
+                
+                return promise;
+            }
+            
+            // PromiseChain
+            func1().then(func2).then(func3).then(func4);
+            
+        </script>
+    </body>
+</html>

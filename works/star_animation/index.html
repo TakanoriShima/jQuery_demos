@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="robots" content="noindex,nofollow">
+        <title>WEB SCREEN APP</title>
+        <style>
+            body { 
+                margin: 0;
+            }
+            #screen {
+                width: 50%;
+                height: 50%;
+                border: solid 1px #000000;
+            }
+            #control {
+                background-color: #5f5f5f;
+                padding: 2px
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="screen"></canvas>
+        <div id="control">
+            <button id="move_btn">MOVE</button>
+            <button id="stop_btn">STOP</button>
+        </div>
+        <!--https://www.programming-fun.net/article/article_71.html-->
+        <script>
+            var timer_id = null;
+            var canvas = document.getElementById('screen');
+            var context;
+            var timerID = null;
+            var objArray = new Array();
+            const INTERVAL = 1000;
+            
+            class Ball{
+                constructor(x, y, width, height, rotFlg, speed,image_fname ) {
+                    this.posX = x;             // CanvasのX座標
+                    this.posY = y;             // CanvasのY座標
+                    this.width = width;        // 画像の横幅
+                    this.height = height;      // 画像の縦幅
+                    this.posXmoveDirection = true; // true : X座標増加, false : X座標減少
+                    this.posYmoveDirection = true; // true : Y座標増加, false : Y座標減少  
+                    this.moveSpeed = speed;    // 移動速度
+                    this.rotateAngle = 0;      // 回転角度
+                    this.rotateFlag = rotFlg;  // 回転フラグ
+                    
+                    // Imageオブジェクト生成
+                    var img = new Image();     
+                    
+                    // 画像ファイルを読み込み
+                    img.src = image_fname;     
+                    
+                    // 画像ファイルをセット
+                    this.image = img;         
+                }
+                
+                move(){  
+                    if( this.posXmoveDirection === false ) {
+                        this.posX -= this.moveSpeed;
+                    } else {
+                        this.posX += this.moveSpeed;  
+                    }
+       
+                    if( this.posYmoveDirection === false ) {                 
+                        this.posY -= this.moveSpeed;
+                    } else {               
+                        this.posY += this.moveSpeed;       
+                    }
+                }
+            }
+            
+            //コンテキストの取得可否チェック
+            if(canvas.getContext){
+
+                //canvas要素のコンテキストを取得
+                context = canvas.getContext('2d');
+                
+                // new Ball(X座標,Y座標,横幅,高さ,移動速度,回転有無,画像ファイル名)
+                objArray.unshift(
+                    new Ball(150,75,30,30,false,0.4,"./img/1.png"),
+                    new Ball(70,120,30,30,true,0.6,"./img/1.png"),
+                    new Ball(45,115,30,30,true,0.8,"./img/1.png"),
+                    new Ball(53,45,30,30,true,1.0,"./img/1.png"),
+                    new Ball(178,103,30,30,false,1.2,"./img/1.png"),
+                    new Ball(223,141,30,30,false,1.4,"./img/1.png"),
+                    new Ball(255,111,30,30,false,1.6,"./img/1.png"),
+                    new Ball(215,121,30,30,true,1.8,"./img/1.png")
+                );        
+            }
+            
+            function move(){
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                
+                objArray.forEach(function( obj ) {
+                
+                    if(obj.posX >= canvas.width - (obj.width / 2)){
+                        obj.posXmoveDirection = false;
+                    }
+                
+                    if(obj.posX <= (obj.width / 2)){
+                        obj.posXmoveDirection = true;
+                    }
+                
+                    if(obj.posY >= canvas.height - (obj.height / 2)){
+                        obj.posYmoveDirection = false;
+                    }
+                
+                    if(obj.posY <= (obj.height / 2)){
+                        obj.posYmoveDirection = true;
+                    }
+                
+                    obj.move();
+                
+                    context.beginPath();
+                     
+                    if(obj.rotateFlag === true){
+                        context.save();
+                        context.translate(obj.posX, obj.posY);
+                        obj.rotateAngle++;
+                        context.rotate(( obj.rotateAngle % 360 ) / 180 * Math.PI);
+                        context.translate(-obj.width/2, -obj.height/2);
+                        context.drawImage(obj.image, 0, 0);
+                        context.restore();
+                    } else {
+                        context.drawImage(obj.image, obj.posX - (obj.width/2), obj.posY - (obj.height/2));
+                    }
+                });
+            }
+            
+            function start_move(){
+                timer_id = setInterval(move, 33);
+            }
+            
+            function stop () {
+                clearInterval(timer_id);
+            }
+
+            document.getElementById('move_btn').addEventListener('click', start_move, false);
+            document.getElementById('stop_btn').addEventListener('click', stop, false);
+        </script>
+    </body>
+</html>

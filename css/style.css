@@ -1,0 +1,33 @@
+@charset "utf-8";
+
+/* パソコン、タブレット */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/*タブレット 縦のみ	*/
+@media screen and (max-width: 1024px) and (orientation: portrait){
+    
+}
+/* タブレット 縦から */
+@media screen and (max-width: 1024px){
+    
+}
+/* スマホ 横のみ */
+@media screen and (max-width: 896px) and (orientation: landscape){
+    
+}
+/* スマホ 横から */ 
+@media screen and (max-width: 896px){
+    
+}
+/* スマホ　縦からは */
+@media screen and (max-width: 480px){
+    
+}
+© 2022 GitHub, Inc.
+Terms
+Pr

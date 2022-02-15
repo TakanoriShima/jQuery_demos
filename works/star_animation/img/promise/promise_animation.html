@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>Promiseを使った連続Amination</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-color/2.1.2/jquery.color.js"></script>
+    </head>
+    <body>
+        <h1>Promiseを使った連続Amination</h1>
+        <p>経過秒数: 0秒</p>
+        <p class="sentence">非同期処理の操作が完了したときに結果を返すもの</p>
+        <p class="sentence">PromiseはES2015(ES6)で導入された非同期処理の結果を表現するビルトインオブジェクト</p>
+        <ol></ol>
+        <script>           
+            /* global $*/
+            
+            let sec = 0;
+            
+            const timer = setInterval(() => {
+                sec++;
+                $('p').eq(0).text('経過秒数: ' + sec + '秒');  
+            }, 1000);
+            
+            $('.sentence').css({'opacity': 0, 'margin': 0, 'padding': 20 + 'px', 'backgroundColor': '#ccc'});
+            
+            // テキストアニメーション
+            const text_animation = (resolve) => {
+                const moji = $('h1').text();
+                $('h1').text('');
+                
+                let count = 0;
+                
+                const interval_id = setInterval(() => {
+                    console.log(count);
+                    let type_moji = moji.substr(0, count);
+                    $('h1').text(type_moji);
+                    if(count === moji.length){
+                        clearInterval(interval_id);
+                        $('ol').append($('<li>', {text: 'now' + sec + '(sec) after, text_animation done!'}));
+                        resolve('text_animation done!');
+                    }                
+                    count++;
+                }, 100);
+            }
+            
+            // jQuery animate メソッド利用
+            const color_animation = (resolve, message) => {
+                $('h1').animate({'color': 'red', 'backgroundColor': '#FFC0CB'}, {'duration': 2000, 'complete': () => {
+                    $('ol').append($('<li>', {text: 'now' + sec + '(sec) after, color_animation done!'}));
+                    resolve(message + ' / color_animation done!'); 
+                }}, 'swing');
+            }
+            
+            // jQuery animate メソッド利用
+            const show_content = (resolve, message) => {
+                $('.sentence').animate({'opacity': 1}, {'duration': 3000, 'complete': () => {
+                //   $('ol').append($('<li>', {text: 'now' + sec + '(sec) after, content_animation done!'}));
+                   resolve(message + ' / content_animation done!');
+                }}, 'swing');
+            }
+            
+            
+            // 以下 Promiseチェーンの道具準備
+            const first = () => {
+                return new Promise((resolve, reject) => {
+                    text_animation(resolve);
+                });
+            }
+            
+            const second = (message) => {
+                return new Promise((resolve, reject) => {
+                    color_animation(resolve, message);
+                });
+            }
+            
+            const third = (message) => {
+                return new Promise((resolve, reject) => {
+                    show_content(resolve, message);
+                });
+            }
+            
+            const final = (message) => {
+                // return new Promise((resolve, reject) => {
+                    console.log(message);
+                    $('ol').append($('<li>', {text: 'now' + sec + '(sec) after, content_animation done!'}));
+                    clearInterval(timer);
+                // });
+                
+            }
+            
+            first().then(second).then(third).then(final);
+
+        
+        </script>
+    </body>
+</html>

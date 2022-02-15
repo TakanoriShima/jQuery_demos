@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Geocoder</title>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="shortcut icon" href="images/map.ico">
+    </head>
+    <body>
+        <div class="container">
+            
+            <!-- 1行 -->
+            <div class="row mt-3">
+                <div class="col-sm-12">
+                    <h1 class="text-center">地図検索</h1>
+                </div>
+            </div>
+            
+            <!-- 1行 -->
+            <div class="form-group row mt-3 search_box">
+                <label class="col-sm-2 col-form-label text-center">地名</label>
+                <div class="col-sm-8">
+                    <input type="search" class="form-control" id="address" required>
+                </div>
+                <div class="col-sm-2 mt-3">
+                    <button class="btn btn-primary form-control" id="address_search_button">地名で検索</button>
+                </div>
+            </div>
+      
+            <!-- 1行 -->  
+            <div class="form-group row mt-3 search_box">
+                <label class="col-sm-2 col-form-label text-center">緯度</label>
+                <div class="col-sm-3">
+                    <input type="search" class="form-control" id="lat">
+                </div>
+                <label class="col-sm-2 col-form-label text-center">経度</label>
+                <div class="col-sm-3">
+                    <input type="search" class="form-control" id="lng">
+                </div>
+                <div class="col-sm-2 mt-3">
+                    <button class="btn btn-primary form-control" id="latlng_search_button">緯度経度で検索</button>
+                </div>
+            </div>
+            
+            <!-- 1行 -->
+            <div class="row mt-5">
+                <div id="map" class="col-sm-12"></div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="js/geocoder.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALg70uaMcYjkzto9oPmiXyODIXCvpvAzg&callback=initMap"></script>
+    </body>
+</html>
